@@ -44,7 +44,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,sans
 <footer class="footer"><span class="schoolfoot" id="address">Jl. Bojong Raya No.114A Kel. Cibuntu, Kec. Bandung Kulon, Kota Bandung</span><span id="city">Bandung</span><span class="hours" id="hours">Jam Sekolah 07.00 - 15.30</span></footer>
 </div>
 <script>
-const API_URL='https://script.google.com/macros/s/AKfycbwEHh7GfBbKBoLI9XZ3v9jH60nfyX37jIWTGFI5vc6KyY6C43VteiHSRlXlETaofKMcTw/exec';
+const API_URL='https://script.google.com/macros/s/AKfycbyfqqN3WhRl5rasgXVOuWHRcmRgtUP1mdM2Kh2PZOGFyNKt9w62Ob7vIvfyXXiYrQJfuA/exec';
 let D={},ai=0,ri=0,galleryIndex=0;
 function api(action,data={}){return new Promise((resolve,reject)=>{const cb='cb_'+Date.now()+'_'+Math.random().toString(36).slice(2),s=document.createElement('script');const params=new URLSearchParams({action,callback:cb,...data});const timer=setTimeout(()=>{cleanup();reject(new Error('Timeout menghubungi backend Apps Script.'))},15000);function cleanup(){clearTimeout(timer);delete window[cb];s.remove()}window[cb]=(j)=>{cleanup();if(!j||!j.success)reject(new Error((j&&j.message)||'Backend error'));else resolve(j.data)};s.onerror=()=>{cleanup();reject(new Error('Backend tidak dapat diakses. Periksa deployment Web App Apps Script.'))};s.src=API_URL+'?'+params.toString();document.head.appendChild(s)})}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
