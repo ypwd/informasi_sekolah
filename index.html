@@ -125,6 +125,131 @@ body{
   margin-top:8px !important;
 }
 
+
+/* =====================================================
+   FINAL INFO TERKINI TICKER
+   ===================================================== */
+:root{
+  --merah:#ED1C24;
+  --merah-gelap:#C8101E;
+  --kuning:#FFC400;
+  --kuning-muda:#FFE9A3;
+  --krem:#FFF3C7;
+  --navy:#092653;
+  --putih:#FFFFFF;
+  --hitam:#111827;
+}
+
+.info-ticker{
+  width:100%;
+  height:48px;
+  display:flex;
+  align-items:center;
+  background:var(--krem);
+  border:2px solid var(--putih);
+  border-radius:0 24px 24px 0;
+  overflow:hidden;
+  position:relative;
+  font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;
+  box-shadow:0 2px 5px rgba(0,0,0,.12);
+}
+
+.ticker-title{
+  height:100%;
+  min-width:215px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:0 35px 0 20px;
+  background:var(--merah);
+  color:var(--putih);
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.5px;
+  position:relative;
+  z-index:5;
+}
+
+.ticker-title::after{
+  content:"";
+  position:absolute;
+  right:-25px;
+  top:0;
+  width:0;
+  height:0;
+  border-top:24px solid transparent;
+  border-bottom:24px solid transparent;
+  border-left:25px solid var(--merah);
+}
+
+.ticker-icon{
+  font-size:20px;
+  line-height:1;
+}
+
+.ticker-window{
+  flex:1;
+  height:100%;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  background:var(--krem);
+  position:relative;
+  z-index:1;
+}
+
+.ticker-track{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  white-space:nowrap;
+  padding:0 35px;
+  color:var(--hitam);
+  font-size:14px;
+  font-weight:500;
+  animation:tickerMove 35s linear infinite;
+}
+
+.ticker-divider{
+  color:var(--navy);
+  font-size:18px;
+  font-weight:800;
+}
+
+@keyframes tickerMove{
+  0%{transform:translateX(100%);}
+  100%{transform:translateX(-100%);}
+}
+
+.ticker-arrow{
+  height:100%;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding-left:8px;
+  padding-right:18px;
+  background:var(--krem);
+  position:relative;
+  z-index:4;
+}
+
+.ticker-arrow span{
+  display:block;
+  width:0;
+  height:0;
+  border-top:11px solid transparent;
+  border-bottom:11px solid transparent;
+  border-left:17px solid var(--merah);
+}
+
+.ticker-arrow span:nth-child(2){
+  border-left-color:var(--kuning);
+}
+
+.ticker-arrow span:nth-child(3){
+  border-left-color:var(--kuning-muda);
+}
+
 </style>
 </head>
 <body>
@@ -163,5 +288,47 @@ function gallery(){const img=document.getElementById('gi'),cap=document.getEleme
 function ticker(){const a=D.runningText||[];document.getElementById('tick').textContent=a.length?a.map(x=>x.Teks).join('   •   '):'Selamat datang di Display Informasi Sekolah.'}
 async function load(){try{D=await api('getDisplayData');render();document.getElementById('load').style.display='none'}catch(e){document.getElementById('load').textContent='Gagal memuat data display: '+e.message;console.error(e)}}
 clock();setInterval(clock,1000);load();setInterval(load,60000);setInterval(()=>{ai++;announcement()},10000);setInterval(()=>{ri++;achievement()},10000);setInterval(()=>{galleryIndex++;gallery()},10000);
+
+function escapeHtml(text){
+  const div=document.createElement('div');
+  div.textContent=text||'';
+  return div.innerHTML;
+}
+
+function renderRunningText(){
+  const track=document.getElementById('tickerTrack');
+  if(!track) return;
+
+  const data=D.runningText||[];
+
+  if(!data.length){
+    track.innerHTML='<span>Selamat datang di Display Informasi Sekolah SMKS Widya Dirgantara Bandung.</span>';
+    return;
+  }
+
+  track.innerHTML=data.map((x,i)=>{
+    const teks=escapeHtml(x.Teks||'');
+    return `<span>${teks}</span>${i<data.length-1?'<span class="ticker-divider">|</span>':''}`;
+  }).join('');
+}
+
 </script>
+
+<div class="info-ticker">
+  <div class="ticker-title">
+    <span class="ticker-icon">📢</span>
+    <span>INFO TERKINI</span>
+  </div>
+
+  <div class="ticker-window">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <div class="ticker-arrow">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
 </body></html>
