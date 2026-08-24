@@ -20,6 +20,111 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,sans
 .footer{height:4%;display:flex;align-items:center;justify-content:space-between;background:#071a36;color:#fff;font-size:clamp(10px,.86vw,16px);padding:0 .3vw}.footer span{white-space:nowrap}.footer .schoolfoot{max-width:42%;overflow:hidden;text-overflow:ellipsis}.footer .hours{background:#ffbf00;color:#102544;border-radius:18px;padding:.7vh 1vw;font-weight:900}
 .load{position:fixed;inset:0;background:#071a36;display:grid;place-items:center;z-index:5;font-size:24px;color:#fff}
 @media(max-width:1100px){.school h1{font-size:3vw}.clock{width:26%}.row{grid-template-columns:17% 1fr 23%}.footer{font-size:1vw}}
+
+/* Final TV 16:9 refinement */
+:root{
+  --navy:#092653;
+  --navy2:#123d78;
+  --red:#ed1c24;
+  --yellow:#ffc400;
+  --cream:#fff7e5;
+  --white:#ffffff;
+}
+*{box-sizing:border-box}
+body{
+  font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;
+  margin:0;
+  overflow:hidden;
+}
+.header{
+  padding:14px 24px 10px;
+  min-height:138px;
+}
+.header .school-name{
+  line-height:.98;
+  letter-spacing:.3px;
+}
+.header .motto{
+  margin-top:6px;
+}
+.header .datetime{
+  line-height:1.05;
+}
+.header .date{
+  margin-top:8px;
+  line-height:1.05;
+}
+.main-grid{
+  gap:10px !important;
+}
+.card{
+  margin:0 !important;
+}
+.section-title{
+  line-height:1;
+  letter-spacing:.3px;
+}
+.announcement{
+  padding:20px 28px !important;
+}
+.announcement h2{
+  margin:18px 0 6px !important;
+  line-height:1.05;
+}
+.announcement p{
+  margin:0 !important;
+  line-height:1.2;
+}
+.info-row{
+  gap:10px !important;
+}
+.agenda,.prestasi{
+  padding:18px 24px !important;
+}
+.activity{
+  overflow:hidden;
+  position:relative;
+}
+.activity .photo-wrap{
+  position:relative;
+  overflow:hidden;
+}
+.activity .photo-wrap::after{
+  content:"";
+  position:absolute;
+  left:-3%;
+  right:-3%;
+  bottom:-2px;
+  height:46px;
+  background:var(--yellow);
+  border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  z-index:2;
+  pointer-events:none;
+}
+.activity .photo-wrap::before{
+  content:"";
+  position:absolute;
+  left:-3%;
+  right:-3%;
+  bottom:8px;
+  height:30px;
+  background:var(--white);
+  border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  z-index:3;
+  pointer-events:none;
+}
+.activity .caption{
+  position:relative;
+  z-index:4;
+  padding-top:18px !important;
+}
+.ticker{
+  margin-top:10px !important;
+}
+.footer{
+  margin-top:8px !important;
+}
+
 </style>
 </head>
 <body>
